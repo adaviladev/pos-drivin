@@ -15,6 +15,7 @@ h1 {
 
 th, td, tbody {
     text-align: left!important;
+    font-family: "Open Sans", sans-serif;
 }
 
 table {
