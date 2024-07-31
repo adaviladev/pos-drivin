@@ -1,3 +1,21 @@
+body {
+    background-color: rgb(16, 24, 40);
+    color:rgb(255, 255, 255);
+    font-family: po;
+    font-family: "Poppins", sans-serif;
+    max-width: 80vw;
+    margin: auto;
+}
+
 h1 {
     text-align: center;
+    margin-top: 5vh;
+}
+
+th, td, tbody {
+    text-align: left!important;
+}
+
+table {
+    font-size: smaller;
 }

@@ -20,7 +20,9 @@
  *
  * Date: 2023-05-11T18:29Z
  */
-new DataTable('#drivin');
+
+
+
 
 ( function( global, factory ) {
 
