@@ -107,3 +107,41 @@ $('#dt-search-0').on('input', function() {
     const model = $(this).val();
     fetchData(model);
 });
+
+
+// Modal
+
+// Abre el modal
+document.getElementById('openModalBtn').onclick = function() {
+    document.getElementById('filterModal').style.display = 'block';
+}
+
+// Cierra el modal cuando el usuario hace clic en la 'X'
+document.getElementsByClassName('close')[0].onclick = function() {
+    document.getElementById('filterModal').style.display = 'none';
+}
+
+// Cierra el modal si el usuario hace clic fuera del modal
+window.onclick = function(event) {
+    if (event.target == document.getElementById('filterModal')) {
+        document.getElementById('filterModal').style.display = 'none';
+    }
+}
+
+// Manejo del formulario de filtros
+document.getElementById('filterForm').onsubmit = function(event) {
+    event.preventDefault();
+    // Obtener valores de los filtros
+    let carType = document.getElementById('carType').value;
+    let make = document.getElementById('make').value;
+    let model = document.getElementById('model').value;
+    let year = document.getElementById('year').value;
+    let transmission = document.getElementById('transmission').value;
+    let mpgRange = document.getElementById('mpgRange').value;
+
+    // Filtrar datos con los valores obtenidos
+    filterData(carType, make, model, year, transmission, mpgRange);
+
+    // Cerrar el modal después de aplicar los filtros
+    document.getElementById('filterModal').style.display = 'none';
+}
