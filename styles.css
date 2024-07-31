@@ -60,3 +60,15 @@ table {
     text-decoration: none;
     cursor: pointer;
 }
+
+form {
+    padding: 5%;
+}
+
+.filter-title {
+    padding-left: 5%;
+}
+
+.filter-btn {
+    margin-top: 30px;
+}
