@@ -60,7 +60,7 @@ const fetchData = (model = '') => {
     fetch(apiUrl, {
         method: 'GET',
         headers: {
-            'X-Api-Key': '+Q7oY2WzWPvMxAYRfCVsog==L5nkF9CS3pf6Vkqr' // Reemplaza con tu clave de API
+            'X-Api-Key': '+Q7oY2WzWPvMxAYRfCVsog==L5nkF9CS3pf6Vkqr'
         }
     })
     .then(response => {
@@ -100,7 +100,7 @@ const fetchData = (model = '') => {
 };
 
 // Fetch data on page load with default model
-fetchData('camry');
+fetchData('');
 
 // Update the model and fetch new data when the user types in the search box
 $('#dt-search-0').on('input', function() {
