@@ -51,7 +51,7 @@ let table = $('#drivin').DataTable({
     pageLength: 20,
     lengthChange: false,
     ordering: true,
-    searching: true
+    searching: true,
 });
 
 const fetchData = (model) => {
