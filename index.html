@@ -22,6 +22,9 @@
 
 <body>
     <h1>Gestor de Vehículos Driv.in</h1>
+
+
+
     <table id="drivin" class="display table table-striped table-bordered">
         <thead>
             <tr>
@@ -53,45 +56,45 @@
         </tfoot>
     </table>
 
+
     <!-- Botón para abrir el modal -->
-<button id="openModalBtn" class="btn btn-primary">Abrir Filtros</button>
+    <button id="openModalBtn" class="btn btn-primary">Abrir Filtros</button>
 
-<!-- El modal -->
-<div id="filterModal" class="modal">
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <h2>Filtros</h2>
-    <!-- Contenido del modal, como formularios de filtro -->
-    <form id="filterForm">
-      <div class="form-group">
-        <label for="carType">Tipo de Auto:</label>
-        <input type="text" id="carType" name="carType" class="form-control">
-      </div>
-      <div class="form-group">
-        <label for="make">Marca:</label>
-        <input type="text" id="make" name="make" class="form-control">
-      </div>
-      <div class="form-group">
-        <label for="model">Modelo:</label>
-        <input type="text" id="model" name="model" class="form-control">
-      </div>
-      <div class="form-group">
-        <label for="year">Año:</label>
-        <input type="number" id="year" name="year" class="form-control">
-      </div>
-      <div class="form-group">
-        <label for="transmission">Tipo de Transmisión:</label>
-        <input type="text" id="transmission" name="transmission" class="form-control">
-      </div>
-      <div class="form-group">
-        <label for="mpgRange">Consumo (mpg):</label>
-        <input type="text" id="mpgRange" name="mpgRange" class="form-control">
-      </div>
-      <button type="submit" class="btn btn-success">Aplicar Filtros</button>
-    </form>
-  </div>
-</div>
-
+    <!-- El modal -->
+    <div id="filterModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Filtros</h2>
+            <!-- Contenido del modal, como formularios de filtro -->
+            <form id="filterForm">
+                <div class="form-group">
+                    <label for="carType">Tipo de Auto:</label>
+                    <input type="text" id="carType" name="carType" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="make">Marca:</label>
+                    <input type="text" id="make" name="make" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="model">Modelo:</label>
+                    <input type="text" id="model" name="model" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="year">Año:</label>
+                    <input type="number" id="year" name="year" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="transmission">Tipo de Transmisión:</label>
+                    <input type="text" id="transmission" name="transmission" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="mpgRange">Consumo (mpg):</label>
+                    <input type="text" id="mpgRange" name="mpgRange" class="form-control">
+                </div>
+                <button type="submit" class="btn btn-success">Aplicar Filtros</button>
+            </form>
+        </div>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"

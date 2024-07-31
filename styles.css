@@ -5,6 +5,7 @@ body {
     font-family: "Poppins", sans-serif;
     max-width: 80vw;
     margin: auto;
+    margin-bottom: 20px;
 }
 
 h1 {
@@ -33,6 +34,7 @@ table {
     height: 100%;
     overflow: auto;
     background-color: rgba(0,0,0,0.5);
+
 }
 
 .modal-content {
@@ -46,7 +48,7 @@ table {
 }
 
 .close {
-    color: #aaa;
+    color: #747373;
     float: right;
     font-size: 28px;
     font-weight: bold;
