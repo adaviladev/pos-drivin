@@ -127,6 +127,12 @@ $("#dt-search-0").on("input", function () {
 // Open the modal
 document.getElementById("openModalBtn").onclick = function () {
   document.getElementById("filterModal").style.display = "block";
+
+  // Clear the search input field
+  document.getElementById("dt-search-0").value = "";
+
+  // Trigger the DataTables search function to reflect the cleared input
+  table.search("").draw();
 };
 
 // Close the modal when the user clicks on the 'X'
