@@ -8,23 +8,27 @@ let table = $("#drivin").DataTable({
 });
 
 // Initialize Leaflet map
-var map = L.map("map").setView([-33.4489, -70.6693], 5); // Centered on Santiago
+var map = L.map("map").setView([0, 0], 2); // Centered globally
 L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
   maxZoom: 19,
   attribution:
     '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
 }).addTo(map);
 
-var marker = L.marker([-33.4489, -70.6693]).addTo(map); // Initial marker position
+var marker = L.marker([0, 0]).addTo(map); // Initial marker position
 
-// Landmark data
-const landmarks = [
-  { name: "Easter Island", lat: -27.1127, lng: -109.3497 },
-  { name: "Atacama Desert", lat: -24.5, lng: -68.0 },
-  { name: "Torres del Paine", lat: -51.3, lng: -72.4 },
-  { name: "Valparaíso", lat: -33.0464, lng: -71.3003 },
-  { name: "Santiago", lat: -33.4489, lng: -70.6693 },
-  { name: "Chiloé Island", lat: -41.5, lng: -73.8 },
+// Historical landmarks data
+const historicalLandmarks = [
+  { name: "Eiffel Tower", lat: 48.8584, lng: 2.2945 },
+  { name: "Great Wall of China", lat: 40.4319, lng: 116.5704 },
+  { name: "Machu Picchu", lat: -13.1611, lng: -72.545 },
+  { name: "Colosseum", lat: 41.8902, lng: 12.4922 },
+  { name: "Taj Mahal", lat: 27.1751, lng: 78.0421 },
+  { name: "Statue of Liberty", lat: 40.6892, lng: -74.0445 },
+  { name: "Christ the Redeemer", lat: -22.9068, lng: -43.1729 },
+  { name: "Petra", lat: 30.3285, lng: 35.4444 },
+  { name: "Angkor Wat", lat: 13.4125, lng: 103.8667 },
+  { name: "Sydney Opera House", lat: -33.8568, lng: 151.2153 },
 ];
 
 // Fetch data function
@@ -49,7 +53,15 @@ const fetchData = (model = "") => {
         console.error("No data found");
         return;
       }
-      const tableData = data.map((car) => [
+      // Store vehicle data with simulated historical locations
+      window.vehicleData = data.map((car, index) => ({
+        ...car,
+        lat: historicalLandmarks[index % historicalLandmarks.length].lat,
+        lng: historicalLandmarks[index % historicalLandmarks.length].lng,
+        name: historicalLandmarks[index % historicalLandmarks.length].name,
+      }));
+
+      const tableData = window.vehicleData.map((car) => [
         car.class || "N/A",
         car.fuel_type || "N/A",
         car.make || "N/A",
@@ -62,6 +74,12 @@ const fetchData = (model = "") => {
         car.cylinders || "N/A",
         car.displacement || "N/A",
         car.drive || "N/A",
+        // Add an identifier if available
+        car.id || "N/A", // Assuming each vehicle has a unique ID
+        // Include simulated latitude and longitude
+        car.lat || "N/A",
+        car.lng || "N/A",
+        car.name || "N/A",
       ]);
       table.clear().rows.add(tableData).draw();
     })
@@ -73,16 +91,20 @@ fetchData("");
 
 // Add event listener to table rows for map updates
 $("#drivin tbody").on("click", "tr", function () {
-  // Select a random landmark from the list
-  const randomLandmark =
-    landmarks[Math.floor(Math.random() * landmarks.length)];
+  // Get the index of the clicked row
+  const dataIndex = table.row(this).index();
+  const selectedVehicle = window.vehicleData[dataIndex];
 
-  // Update the map view and marker position
-  map.setView([randomLandmark.lat, randomLandmark.lng], 5);
-  marker
-    .setLatLng([randomLandmark.lat, randomLandmark.lng])
-    .bindPopup(`<b>${randomLandmark.name}</b>`)
-    .openPopup();
+  if (selectedVehicle && selectedVehicle.lat && selectedVehicle.lng) {
+    // Update the map with the selected vehicle's simulated location
+    map.setView([selectedVehicle.lat, selectedVehicle.lng], 10);
+    marker
+      .setLatLng([selectedVehicle.lat, selectedVehicle.lng])
+      .bindPopup(`Tu vehículo se encuentra aquí`)
+      .openPopup();
+  } else {
+    console.error("No location data available for selected vehicle.");
+  }
 });
 
 // Update the model and fetch new data when the user types in the search box
@@ -92,7 +114,6 @@ $("#dt-search-0").on("input", function () {
 });
 
 // Modal
-
 // Open the modal
 document.getElementById("openModalBtn").onclick = function () {
   document.getElementById("filterModal").style.display = "block";
@@ -162,7 +183,15 @@ const filterData = (carType, make, model, year, transmission, mpgRange) => {
         console.error("No data found for filters");
         return;
       }
-      const tableData = data.map((car) => [
+      // Update vehicle data with simulated historical locations
+      window.vehicleData = data.map((car, index) => ({
+        ...car,
+        lat: historicalLandmarks[index % historicalLandmarks.length].lat,
+        lng: historicalLandmarks[index % historicalLandmarks.length].lng,
+        name: historicalLandmarks[index % historicalLandmarks.length].name,
+      }));
+
+      const tableData = window.vehicleData.map((car) => [
         car.class || "N/A",
         car.fuel_type || "N/A",
         car.make || "N/A",
@@ -175,6 +204,12 @@ const filterData = (carType, make, model, year, transmission, mpgRange) => {
         car.cylinders || "N/A",
         car.displacement || "N/A",
         car.drive || "N/A",
+        // Add an identifier if available
+        car.id || "N/A", // Assuming each vehicle has a unique ID
+        // Include simulated latitude and longitude
+        car.lat || "N/A",
+        car.lng || "N/A",
+        car.name || "N/A",
       ]);
       table.clear().rows.add(tableData).draw();
     })
