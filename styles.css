@@ -73,3 +73,9 @@ form {
 .filter-btn {
     margin-top: 30px;
 }
+
+#map {  
+    height: 250px; 
+    outline: auto;
+    margin-top: 30px;
+}
