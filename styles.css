@@ -16,6 +16,7 @@ h1 {
 th, td, tbody {
     text-align: left!important;
     font-family: "Open Sans", sans-serif;
+    cursor: pointer;
 }
 
 table {
@@ -74,8 +75,26 @@ form {
     margin-top: 30px;
 }
 
-#map {  
-    height: 250px; 
-    outline: auto;
-    margin-top: 30px;
-}
+  #map-container {
+    position: relative;
+    width: 100%;
+  }
+
+  #map {
+    height: 250px; /* Adjust as needed */
+  }
+
+  #scrollToTableBtn {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+
+  #scrollToTableBtn:hover {
+    background-color: #0056b3;
+
+  }

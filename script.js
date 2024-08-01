@@ -102,6 +102,9 @@ $("#drivin tbody").on("click", "tr", function () {
       .setLatLng([selectedVehicle.lat, selectedVehicle.lng])
       .bindPopup(`Ubicación del vehículo`)
       .openPopup();
+
+    // Scroll to the map container to make it visible
+    document.getElementById("map").scrollIntoView({ behavior: "smooth" });
   } else {
     console.error("No location data available for selected vehicle.");
   }
@@ -215,3 +218,13 @@ const filterData = (carType, make, model, year, transmission, mpgRange) => {
     })
     .catch((error) => console.error("Error:", error));
 };
+
+// JavaScript to scroll to the table when the button is clicked
+document
+  .getElementById("scrollToTableBtn")
+  .addEventListener("click", function () {
+    const tableElement = document.getElementById("drivin");
+    if (tableElement) {
+      tableElement.scrollIntoView({ behavior: "smooth" });
+    }
+  });
