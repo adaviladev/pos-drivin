@@ -1,31 +1,22 @@
 // Initialize the DataTable for the HTML element with the ID 'drivin'
 // This sets up various configuration options for how the table should behave and appear.
 let table = $("#drivin").DataTable({
-  // Enable pagination to break the data into pages
   paging: true,
-
-  // Set the number of rows to display per page to 20
   pageLength: 20,
-
-  // Disable the option for users to change the number of rows per page
   lengthChange: false,
-
-  // Enable column ordering, allowing users to sort data by clicking on column headers
   ordering: true,
-
-  // Enable searching functionality so users can filter the table data based on text input
   searching: false,
 
   // Customize the layout of the table's search box
-  layout: {
-    topEnd: {
-      // Define the appearance of the search box
-      search: {
-        // Placeholder text that will be displayed inside the search box before any input is given
-        placeholder: "Buscar modelo",
-      },
-    },
-  },
+  // layout: {
+  //   topEnd: {
+  //     // Define the appearance of the search box
+  //     search: {
+  //       // Placeholder text that will be displayed inside the search box before any input is given
+  //       placeholder: "Buscar modelo",
+  //     },
+  //   },
+  // },
 });
 
 // Initialize a Leaflet map and set its initial view
@@ -64,16 +55,10 @@ const historicalLandmarks = [
 ];
 
 // Function to fetch vehicle data from an API based on the given model
-// The 'model' parameter is optional and allows filtering by car model
-const fetchData = (model = "") => {
-  // Construct the API URL with a query to limit the results to 100 and filter by the specified model
-  const apiUrl = `https://api.api-ninjas.com/v1/cars?limit=100&model=${model}`;
-  
-  // Use the Fetch API to request data from the API endpoint
+const fetchData = () => {
+  const apiUrl = `https://api.api-ninjas.com/v1/cars?limit=50`;
   fetch(apiUrl, {
-    // Set the HTTP request method to GET
     method: "GET",
-    // Include the API key in the request headers for authentication
     headers: { "X-Api-Key": "+Q7oY2WzWPvMxAYRfCVsog==L5nkF9CS3pf6Vkqr" },
   })
     // Process the response from the API
@@ -162,10 +147,10 @@ $("#drivin tbody").on("click", "tr", function () {
 });
 
 // Update the model and fetch new data when the user types in the search box
-$("#dt-search-0").on("input", function () {
-  const model = $(this).val();
-  fetchData(model);
-});
+// $("#dt-search-0").on("input", function () {
+//   const model = $(this).val();
+//   fetchData(model);
+// });
 
 // Modal
 // Open the modal
@@ -173,14 +158,14 @@ document.getElementById("openModalBtn").onclick = function () {
   document.getElementById("filterModal").style.display = "block";
 
   // Clear the search input field
-  document.getElementById("dt-search-0").value = "";
+  // document.getElementById("dt-search-0").value = "";
 
   // Trigger the DataTables search function to reflect the cleared input
-  table.search("").draw();
+  // table.search("").draw();
 };
 
 // Close the modal when the user clicks on the 'X'
-document.getElementsByClassName("close")[0].onclick = function () {
+document.getElementsByClassName("close-filter-modal")[0].onclick = function () {
   document.getElementById("filterModal").style.display = "none";
 };
 
@@ -200,10 +185,10 @@ document.getElementById("filterForm").onsubmit = function (event) {
   let model = document.getElementById("model").value;
   let year = document.getElementById("year").value;
   let transmission = document.getElementById("transmission").value;
-  let mpgRange = document.getElementById("mpgRange").value;
+  // let mpgRange = document.getElementById("mpgRange").value;
 
   // Filter data with obtained values
-  filterData(carType, make, model, year, transmission, mpgRange);
+  filterData(carType, make, model, year, transmission); //deleted mpgRange until fixed
 
   // Close the modal after applying filters
   document.getElementById("filterModal").style.display = "none";
@@ -211,7 +196,7 @@ document.getElementById("filterForm").onsubmit = function (event) {
 
 const filterData = (carType, make, model, year, transmission, mpgRange) => {
   // Build the API URL with filters
-  let apiUrl = `https://api.api-ninjas.com/v1/cars?limit=100`;
+  let apiUrl = `https://api.api-ninjas.com/v1/cars?limit=50`;
 
   if (carType) apiUrl += `&class=${carType}`;
   if (make) apiUrl += `&make=${make}`;
@@ -219,10 +204,10 @@ const filterData = (carType, make, model, year, transmission, mpgRange) => {
   if (year) apiUrl += `&year=${year}`;
   if (transmission) apiUrl += `&transmission=${transmission}`;
   // Assume mpgRange is a string in the format 'min-max'
-  if (mpgRange) {
-    const [minMpg, maxMpg] = mpgRange.split("-");
-    apiUrl += `&min_combined_mpg=${minMpg}&max_combined_mpg=${maxMpg}`;
-  }
+  // if (mpgRange) {
+  //   const [minMpg, maxMpg] = mpgRange.split("-");
+  //   apiUrl += `&min_combined_mpg=${minMpg}&max_combined_mpg=${maxMpg}`;
+  // }
 
   fetch(apiUrl, {
     method: "GET",
