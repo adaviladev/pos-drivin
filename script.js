@@ -1,28 +1,53 @@
-// Initialize DataTable
+// Initialize the DataTable for the HTML element with the ID 'drivin'
+// This sets up various configuration options for how the table should behave and appear.
 let table = $("#drivin").DataTable({
+  // Enable pagination to break the data into pages
   paging: true,
+
+  // Set the number of rows to display per page to 20
   pageLength: 20,
+
+  // Disable the option for users to change the number of rows per page
   lengthChange: false,
+
+  // Enable column ordering, allowing users to sort data by clicking on column headers
   ordering: true,
-  searching: true,
+
+  // Enable searching functionality so users can filter the table data based on text input
+  searching: false,
+
+  // Customize the layout of the table's search box
   layout: {
     topEnd: {
+      // Define the appearance of the search box
       search: {
+        // Placeholder text that will be displayed inside the search box before any input is given
         placeholder: "Buscar modelo",
       },
     },
   },
 });
 
-// Initialize Leaflet map
-var map = L.map("map").setView([0, 0], 2); // Centered globally
+// Initialize a Leaflet map and set its initial view
+// The map will be rendered in the HTML element with the ID 'map'
+// It is centered at latitude 0 and longitude 0 with a zoom level of 2, showing the entire world
+var map = L.map("map").setView([0, 0], 2); // Center the map globally
+
+// Add a tile layer to the map using OpenStreetMap tiles
+// Tile layers provide the visual representation of the map
 L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+  // Set the maximum zoom level to 19, which determines how close the user can zoom in
   maxZoom: 19,
+
+  // Provide attribution to OpenStreetMap for the map tiles
   attribution:
     '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-}).addTo(map);
+}).addTo(map); // Add the tile layer to the map
 
-var marker = L.marker([0, 0]).addTo(map); // Initial marker position
+// Create a marker at the initial position of latitude 0 and longitude 0
+// This marker will be displayed on the map at the center point
+var marker = L.marker([0, 0]).addTo(map); // Add the marker to the map at the initial position
+
 
 // Historical landmarks data
 const historicalLandmarks = [
@@ -38,29 +63,43 @@ const historicalLandmarks = [
   { name: "Sydney Opera House", lat: -33.8568, lng: 151.2153 },
 ];
 
-// Fetch data function
+// Function to fetch vehicle data from an API based on the given model
+// The 'model' parameter is optional and allows filtering by car model
 const fetchData = (model = "") => {
+  // Construct the API URL with a query to limit the results to 100 and filter by the specified model
   const apiUrl = `https://api.api-ninjas.com/v1/cars?limit=100&model=${model}`;
+  
+  // Use the Fetch API to request data from the API endpoint
   fetch(apiUrl, {
+    // Set the HTTP request method to GET
     method: "GET",
+    // Include the API key in the request headers for authentication
     headers: { "X-Api-Key": "+Q7oY2WzWPvMxAYRfCVsog==L5nkF9CS3pf6Vkqr" },
   })
+    // Process the response from the API
     .then((response) => {
+      // Check if the response is not OK (status code not in the 200-299 range)
       if (!response.ok) {
+        // Parse the response as JSON and throw an error with status and message
         return response.json().then((err) => {
           throw new Error(
             `HTTP error! Status: ${response.status}, Message: ${err.message}`
           );
         });
       }
+      // Parse and return the response as JSON if the response is OK
       return response.json();
     })
+    // Process the data received from the API
     .then((data) => {
+      // Check if the data is an array and not empty
       if (!Array.isArray(data) || data.length === 0) {
+        // Log an error if no data is found
         console.error("No data found");
         return;
       }
-      // Store vehicle data with simulated historical locations
+      // Map the received data to include simulated historical locations
+      // Use data from the historicalLandmarks array to add latitude, longitude, and name
       window.vehicleData = data.map((car, index) => ({
         ...car,
         lat: historicalLandmarks[index % historicalLandmarks.length].lat,
@@ -68,30 +107,35 @@ const fetchData = (model = "") => {
         name: historicalLandmarks[index % historicalLandmarks.length].name,
       }));
 
+      // Format the vehicle data for display in the DataTable
       const tableData = window.vehicleData.map((car) => [
-        car.class || "N/A",
-        car.fuel_type || "N/A",
-        car.make || "N/A",
-        car.model || "N/A",
-        car.year || "N/A",
-        car.transmission || "N/A",
-        car.city_mpg || "N/A",
-        car.highway_mpg || "N/A",
-        car.combination_mpg || "N/A",
-        car.cylinders || "N/A",
-        car.displacement || "N/A",
-        car.drive || "N/A",
-        // Add an identifier if available
-        car.id || "N/A", // Assuming each vehicle has a unique ID
-        // Include simulated latitude and longitude
+        car.class || "N/A", // Vehicle class or "N/A" if not available
+        car.fuel_type || "N/A", // Fuel type or "N/A" if not available
+        car.make || "N/A", // Vehicle make or "N/A" if not available
+        car.model || "N/A", // Vehicle model or "N/A" if not available
+        car.year || "N/A", // Vehicle year or "N/A" if not available
+        car.transmission || "N/A", // Transmission type or "N/A" if not available
+        car.city_mpg || "N/A", // City MPG or "N/A" if not available
+        car.highway_mpg || "N/A", // Highway MPG or "N/A" if not available
+        car.combination_mpg || "N/A", // Combined MPG or "N/A" if not available
+        car.cylinders || "N/A", // Number of cylinders or "N/A" if not available
+        car.displacement || "N/A", // Engine displacement or "N/A" if not available
+        car.drive || "N/A", // Drive type or "N/A" if not available
+        // Vehicle ID or "N/A" if not available (assuming each vehicle has a unique ID)
+        car.id || "N/A",
+        // Simulated latitude and longitude for each vehicle
         car.lat || "N/A",
         car.lng || "N/A",
+        // Simulated name for each vehicle
         car.name || "N/A",
       ]);
+      // Clear the existing data in the DataTable and add the new data
       table.clear().rows.add(tableData).draw();
     })
+    // Catch and log any errors that occur during the fetch operation
     .catch((error) => console.error("Error:", error));
 };
+
 
 // Fetch data on page load
 fetchData("");
