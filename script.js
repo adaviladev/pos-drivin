@@ -5,7 +5,15 @@ let table = $("#drivin").DataTable({
   lengthChange: false,
   ordering: true,
   searching: true,
+  layout: {
+    topEnd: {
+      search: {
+        placeholder: "Buscar modelo",
+      },
+    },
+  },
 });
+
 
 // Initialize Leaflet map
 var map = L.map("map").setView([0, 0], 2); // Centered globally
