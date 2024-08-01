@@ -100,7 +100,7 @@ $("#drivin tbody").on("click", "tr", function () {
     map.setView([selectedVehicle.lat, selectedVehicle.lng], 10);
     marker
       .setLatLng([selectedVehicle.lat, selectedVehicle.lng])
-      .bindPopup(`Tu vehículo se encuentra aquí`)
+      .bindPopup(`Ubicación del vehículo`)
       .openPopup();
   } else {
     console.error("No location data available for selected vehicle.");
