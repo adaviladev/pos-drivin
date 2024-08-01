@@ -71,9 +71,11 @@ form {
     padding-left: 5%;
 }
 
-.filter-btn {
-    margin-top: 30px;
+.filter-btns {
+margin-top: 20px;
 }
+
+
 
   #map-container {
     position: relative;

@@ -14,7 +14,6 @@ let table = $("#drivin").DataTable({
   },
 });
 
-
 // Initialize Leaflet map
 var map = L.map("map").setView([0, 0], 2); // Centered globally
 L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -235,4 +234,15 @@ document
     if (tableElement) {
       tableElement.scrollIntoView({ behavior: "smooth" });
     }
+  });
+
+// Add event listener for the clear filters button
+document
+  .querySelector(".clear-filter-btn")
+  .addEventListener("click", function () {
+    // Select all input fields in the filter form
+    const inputs = document.querySelectorAll("#filterForm .form-control");
+
+    // Clear the value of each input field
+    inputs.forEach((input) => (input.value = ""));
   });
