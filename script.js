@@ -6,17 +6,6 @@ let table = $("#drivin").DataTable({
   lengthChange: false,
   ordering: true,
   searching: false,
-
-  // Customize the layout of the table's search box
-  // layout: {
-  //   topEnd: {
-  //     // Define the appearance of the search box
-  //     search: {
-  //       // Placeholder text that will be displayed inside the search box before any input is given
-  //       placeholder: "Buscar modelo",
-  //     },
-  //   },
-  // },
 });
 
 // Initialize a Leaflet map and set its initial view
@@ -39,8 +28,7 @@ L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
 // This marker will be displayed on the map at the center point
 var marker = L.marker([0, 0]).addTo(map); // Add the marker to the map at the initial position
 
-
-// Historical landmarks data
+// Historical landmarks data used for random location of cars
 const historicalLandmarks = [
   { name: "Eiffel Tower", lat: 48.8584, lng: 2.2945 },
   { name: "Great Wall of China", lat: 40.4319, lng: 116.5704 },
@@ -103,16 +91,6 @@ const fetchData = () => {
         car.city_mpg || "N/A", // City MPG or "N/A" if not available
         car.highway_mpg || "N/A", // Highway MPG or "N/A" if not available
         car.combination_mpg || "N/A", // Combined MPG or "N/A" if not available
-        car.cylinders || "N/A", // Number of cylinders or "N/A" if not available
-        car.displacement || "N/A", // Engine displacement or "N/A" if not available
-        car.drive || "N/A", // Drive type or "N/A" if not available
-        // Vehicle ID or "N/A" if not available (assuming each vehicle has a unique ID)
-        car.id || "N/A",
-        // Simulated latitude and longitude for each vehicle
-        car.lat || "N/A",
-        car.lng || "N/A",
-        // Simulated name for each vehicle
-        car.name || "N/A",
       ]);
       // Clear the existing data in the DataTable and add the new data
       table.clear().rows.add(tableData).draw();
@@ -120,7 +98,6 @@ const fetchData = () => {
     // Catch and log any errors that occur during the fetch operation
     .catch((error) => console.error("Error:", error));
 };
-
 
 // Fetch data on page load
 fetchData("");
@@ -194,7 +171,7 @@ document.getElementById("filterForm").onsubmit = function (event) {
   document.getElementById("filterModal").style.display = "none";
 };
 
-const filterData = (carType, make, model, year, transmission, mpgRange) => {
+const filterData = (carType, make, model, year, transmission) => {
   // Build the API URL with filters
   let apiUrl = `https://api.api-ninjas.com/v1/cars?limit=50`;
 
@@ -246,15 +223,6 @@ const filterData = (carType, make, model, year, transmission, mpgRange) => {
         car.city_mpg || "N/A",
         car.highway_mpg || "N/A",
         car.combination_mpg || "N/A",
-        car.cylinders || "N/A",
-        car.displacement || "N/A",
-        car.drive || "N/A",
-        // Add an identifier if available
-        car.id || "N/A", // Assuming each vehicle has a unique ID
-        // Include simulated latitude and longitude
-        car.lat || "N/A",
-        car.lng || "N/A",
-        car.name || "N/A",
       ]);
       table.clear().rows.add(tableData).draw();
     })
