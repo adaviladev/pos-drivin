@@ -64,16 +64,27 @@ table {
   cursor: pointer;
 }
 
+#openModalBtn {
+  margin-top: 60px;
+}
+
 form {
   padding: 5%;
 }
 
+#filterForm {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
 .filter-title {
   padding-left: 5%;
+  font-size: 24px;
+  margin-bottom: 12px;
 }
 
 .filter-btns {
-  margin-top: 20px;
+  margin-top: 18px;
 }
 
 #map-container {
