@@ -1,5 +1,4 @@
-// Initialize the DataTable for the HTML element with the ID 'drivin'
-// This sets up various configuration options for how the table should behave and appear.
+// Initialize the DataTable for the HTML element with the ID 'drivin' with config options
 let table = $("#drivin").DataTable({
   paging: true,
   pageLength: 20,
@@ -71,14 +70,6 @@ const fetchData = () => {
         console.error("No data found");
         return;
       }
-      // Map the received data to include simulated historical locations
-      // Use data from the historicalLandmarks array to add latitude, longitude, and name
-      window.vehicleData = data.map((car, index) => ({
-        ...car,
-        lat: historicalLandmarks[index % historicalLandmarks.length].lat,
-        lng: historicalLandmarks[index % historicalLandmarks.length].lng,
-        name: historicalLandmarks[index % historicalLandmarks.length].name,
-      }));
 
       // Format the vehicle data for display in the DataTable
       const tableData = window.vehicleData.map((car) => [
@@ -92,6 +83,16 @@ const fetchData = () => {
         car.highway_mpg || "N/A", // Highway MPG or "N/A" if not available
         car.combination_mpg || "N/A", // Combined MPG or "N/A" if not available
       ]);
+
+      // Map the received data to include simulated historical locations
+      // Use data from the historicalLandmarks array to add latitude, longitude, and name
+      window.vehicleData = data.map((car, index) => ({
+        ...car,
+        lat: historicalLandmarks[index % historicalLandmarks.length].lat,
+        lng: historicalLandmarks[index % historicalLandmarks.length].lng,
+        name: historicalLandmarks[index % historicalLandmarks.length].name,
+      }));
+
       // Clear the existing data in the DataTable and add the new data
       table.clear().rows.add(tableData).draw();
     })
@@ -115,30 +116,16 @@ $("#drivin tbody").on("click", "tr", function () {
       .setLatLng([selectedVehicle.lat, selectedVehicle.lng])
       .bindPopup(`Ubicación del vehículo`)
       .openPopup();
-
-    // Scroll to the map container to make it visible
     document.getElementById("map").scrollIntoView({ behavior: "smooth" });
   } else {
-    console.error("No location data available for selected vehicle.");
+    console.error("No existen datos de ubicación para el vehículo seleccionado.");
   }
 });
-
-// Update the model and fetch new data when the user types in the search box
-// $("#dt-search-0").on("input", function () {
-//   const model = $(this).val();
-//   fetchData(model);
-// });
 
 // Modal
 // Open the modal
 document.getElementById("openModalBtn").onclick = function () {
   document.getElementById("filterModal").style.display = "block";
-
-  // Clear the search input field
-  // document.getElementById("dt-search-0").value = "";
-
-  // Trigger the DataTables search function to reflect the cleared input
-  // table.search("").draw();
 };
 
 // Close the modal when the user clicks on the 'X'
@@ -229,7 +216,7 @@ const filterData = (carType, make, model, year, transmission) => {
     .catch((error) => console.error("Error:", error));
 };
 
-// JavaScript to scroll to the table when the button is clicked
+// Code to scroll to the table when the button is clicked
 document
   .getElementById("scrollToTableBtn")
   .addEventListener("click", function () {
