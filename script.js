@@ -8,7 +8,7 @@ let table = $("#drivin").DataTable({
 });
 
 // Initialize a Leaflet map and set its initial view
-var map = L.map("map").setView([0, 0], 2); // Center the map globally
+var map = L.map("map").setView([51.505, -0.09], 13);
 
 // Add a tile layer to the map using OpenStreetMap tiles
 L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -18,7 +18,7 @@ L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
 }).addTo(map); // Add the tile layer to the map
 
 // Create a marker at the initial position of latitude 0 and longitude 0
-var marker = L.marker([0, 0]).addTo(map); // Add the marker to the map at the initial position
+var marker = L.marker([51.5, -0.09]).addTo(map); // Add the marker to the map at the initial position
 
 // Historical landmarks data used for random location of cars
 const historicalLandmarks = [
@@ -133,12 +133,15 @@ $("#drivin tbody").on("click", "tr", function () {
   const selectedVehicle = window.vehicleData[dataIndex];
 
   if (selectedVehicle && selectedVehicle.lat && selectedVehicle.lng) {
-    map.setView([selectedVehicle.lat, selectedVehicle.lng], 10);
-    marker
-      .setLatLng([selectedVehicle.lat, selectedVehicle.lng])
-      .bindPopup(`Ubicación del vehículo`)
-      .openPopup();
-    document.getElementById("map").scrollIntoView({ behavior: "smooth" });
+    document.getElementById("mapModal").style.display = "block"; // Muestra el modal primero
+    setTimeout(() => {
+      map.invalidateSize(); // Asegúrate de que Leaflet recalcula el tamaño del mapa
+      map.setView([selectedVehicle.lat, selectedVehicle.lng], 10);
+      marker
+        .setLatLng([selectedVehicle.lat, selectedVehicle.lng])
+        .bindPopup(`Ubicación del vehículo`)
+        .openPopup();
+    }, 100); // Agrega un pequeño retraso para asegurar que el modal se ha mostrado completamente
   } else {
     console.error(
       "No existen datos de ubicación para el vehículo seleccionado."
@@ -146,33 +149,32 @@ $("#drivin tbody").on("click", "tr", function () {
   }
 });
 
-// Modal
-// Open the modal
+
+// Modals
+// Open the Filter Modal
 document.getElementById("openModalBtn").onclick = function () {
   document.getElementById("filterModal").style.display = "block";
 };
 
-// Close the modal when the user clicks on the 'X'
+// Close the Modals when the user clicks on the 'X'
 document.getElementsByClassName("close-filter-modal")[0].onclick = function () {
   document.getElementById("filterModal").style.display = "none";
 };
 
-// Close the modal if the user clicks outside the modal
+document.getElementsByClassName("close-map-modal")[0].onclick = function () {
+  document.getElementById("mapModal").style.display = "none";
+};
+
+// Close the Modals if the user clicks outside the modal
 window.onclick = function (event) {
   if (event.target == document.getElementById("filterModal")) {
     document.getElementById("filterModal").style.display = "none";
   }
+  if (event.target == document.getElementById("mapModal")) {
+    document.getElementById("mapModal").style.display = "none";
+  }
 };
 
-// Scroll to the table when the button is clicked
-document
-  .getElementById("scrollToTableBtn")
-  .addEventListener("click", function () {
-    const tableElement = document.getElementById("drivin");
-    if (tableElement) {
-      tableElement.scrollIntoView({ behavior: "smooth" });
-    }
-  });
 
 // Add event listener for the clear filters button
 document

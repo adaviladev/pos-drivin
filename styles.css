@@ -50,7 +50,7 @@ table {
   color: black;
 }
 
-.close-filter-modal {
+.close-filter-modal, .close-map-modal {
   color: #747373;
   float: right;
   font-size: 28px;
@@ -58,7 +58,9 @@ table {
 }
 
 .close-filter-modal:hover,
-.close-filter-modal:focus {
+.close-filter-modal:focus,
+.close-map-modal:hover,
+.close-map-modal:focus {
   color: black;
   text-decoration: none;
   cursor: pointer;
@@ -85,27 +87,4 @@ form {
 
 .filter-btns {
   margin-top: 18px;
-}
-
-#map-container {
-  position: relative;
-  width: 100%;
-}
-
-#map {
-  height: 250px; /* Adjust as needed */
-}
-
-#scrollToTableBtn {
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  margin-top: 20px;
-}
-
-#scrollToTableBtn:hover {
-  background-color: #0056b3;
 }

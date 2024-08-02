@@ -38,7 +38,7 @@
 <body>
   <h1>Gestor de Vehículos Driv.in</h1>
 
-  <!-- Modal de búqueda con filtros -->
+  <!-- Search Modal -->
 
   <button id="openModalBtn" class="btn btn-primary">Buscar Vahículos</button>
 
@@ -79,7 +79,7 @@
     </div>
   </div>
 
-  <!-- Tabla -->
+  <!-- Table -->
 
   <table id="drivin" class="display table table-striped table-bordered">
     <thead>
@@ -98,12 +98,16 @@
     <tbody></tbody>
   </table>
 
-  <!-- Mapa -->
-
-  <div id="map-container">
-    <div id="map"></div>
-    <button id="scrollToTableBtn">Ver tabla</button>
+  <!-- Map Modal -->
+  <div id="mapModal" class="modal">
+    <div id="map-container" class="modal-content">
+      <span class="close-map-modal">&times;</span>
+      <h2 class="map-title">Ubicación del Vehículo</h2>
+      <div id="map" style="height: 400px;"></div>
+    </div>
   </div>
+
+  <!-- Scripts -->
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
