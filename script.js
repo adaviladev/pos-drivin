@@ -34,6 +34,79 @@ const historicalLandmarks = [
   { name: "Sydney Opera House", lat: -33.8568, lng: 151.2153 },
 ];
 
+// Function to format transmission type
+const formatTransmission = (transmission) => {
+  switch (transmission) {
+    case 'a':
+      return 'Automática';
+    case 'm':
+      return 'Manual';
+    default:
+      return 'N/A';
+  }
+};
+
+// Function to format fuel type
+const formatFuelType = (fuelType) => {
+  switch (fuelType) {
+    case "gas":
+      return "Gasolina";
+    case "diesel":
+      return "Diésel";
+    case "electric":
+      return "Eléctrico";
+    case "hybrid":
+      return "Híbrido";
+    default:
+      return "N/A";
+  }
+};
+
+// Function to format class type
+const formatClass = (carClass) => {
+  switch (carClass) {
+    case 'large car':
+      return 'Vehículo grande';
+    case 'midsize car':
+      return 'Vehículo mediano';
+    case 'midsize-large station wagon':
+      return 'Furgoneta mediana-grande';
+    case 'small pickup truck':
+      return 'Camioneta pequeña';
+    case 'small station wagon':
+      return 'Furgoneta pequeña';
+    case 'standard pickup truck':
+      return 'Camioneta estándar';
+    case 'compact car':
+      return 'Vehículo compacto';
+    case 'subcompact car':
+      return 'Vehículo subcompacto';
+    case 'special purpose vehicle':
+      return 'Vehículo de propósito especial';
+    case 'two seater':
+      return 'Biplaza';
+    case 'mini compact car':
+      return 'Vehículo mini compacto';
+    case 'sport utility vehicle':
+      return 'Vehículo utilitario deportivo (SUV)';
+    case 'van':
+      return 'Furgoneta';
+    default:
+      return 'N/A';
+  }
+};
+
+// const formatMeasurement = (measure) => {
+//   switch (measure) {
+//     case `${convertMpgToKml}`:
+//   } return `${convertMpgToKml} + km/l`
+// }
+
+// Function to convert mpg to km/l
+const convertMpgToKml = (mpg) => {
+  return `${(mpg * 0.425144).toFixed(2)} km/l`;
+};
+
 // Function to process API data and update the DataTable
 const processVehicleData = (data) => {
   if (!Array.isArray(data) || data.length === 0) {
@@ -49,6 +122,13 @@ const processVehicleData = (data) => {
     lat: historicalLandmarks[index % historicalLandmarks.length].lat,
     lng: historicalLandmarks[index % historicalLandmarks.length].lng,
     name: historicalLandmarks[index % historicalLandmarks.length].name,
+
+    transmission: formatTransmission(car.transmission),
+    fuel_type: formatFuelType(car.fuel_type),
+    class: formatClass(car.class),
+    city_kml: convertMpgToKml(car.city_mpg),
+    highway_kml: convertMpgToKml(car.highway_mpg),
+    combination_kml: convertMpgToKml(car.combination_mpg),
   }));
 
   // Format the vehicle data for display in the DataTable
@@ -59,9 +139,9 @@ const processVehicleData = (data) => {
     car.model || "N/A",
     car.year || "N/A",
     car.transmission || "N/A",
-    car.city_mpg || "N/A",
-    car.highway_mpg || "N/A",
-    car.combination_mpg || "N/A",
+    car.city_kml || "N/A", // Usar los valores convertidos en km/l
+    car.highway_kml || "N/A", // Usar los valores convertidos en km/l
+    car.combination_kml || "N/A", // Usar los valores convertidos en km/l
   ]);
 
   // Clear the existing data in the DataTable and add the new data
