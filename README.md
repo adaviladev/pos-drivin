@@ -1,4 +1,4 @@
-# Gestor de vehículos Driv.in App
+    # Gestor de vehículos Driv.in App
 
 Gestor de vehículos con filtros avanzados y ubicación en el mapa diseñado para optimizar la administración y el seguimiento de los vehículos de una flota.
 
@@ -29,6 +29,10 @@ Para buscar vehículos:
 3. Haz clic en **Aplicar Filtros** para ver los resultados en la tabla.
 4. Haz clic en una fila de la tabla para ver la ubicación del vehículo en el mapa.
 5. Haz clic en el símbolo "X" o fuera del mapa para volver a la tabla.
+
+### Nota sobre el término "Consumo"
+
+La tabla de resultados incluye columnas denominadas "Rendimiento en Ciudad", "Rendimiento en Carretera" y "Rendimiento Mixto". Aunque en la prueba se solicitó usar el término "Consumo", consideré más apropiado utilizar el término "Rendimiento" para mejorar la experiencia del usuario. En la API utilizada, los datos de consumo se expresan como rendimiento en miles per gallon (mpg), que fueron convertidos al estándar latinoamericano (km/l) utilizando la fórmula *mpg * 0.425144*, redondeado a dos decimales. Para los fines de esta aplicación, "consumo" y "rendimiento" se consideran equivalentes.
 
 ## Contacto
 

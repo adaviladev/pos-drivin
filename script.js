@@ -304,3 +304,47 @@ document
     // Clear the value of each input field
     inputs.forEach((input) => (input.value = ""));
   });
+
+  // Event listener for filter form submission
+document.getElementById("filterForm").onsubmit = function (event) {
+  event.preventDefault();
+
+  // Get filter values
+  let carType = document.getElementById("carType").value;
+  let make = document.getElementById("make").value;
+  let model = document.getElementById("model").value;
+  let year = document.getElementById("year").value;
+  let transmission = document.getElementById("transmission").value;
+  let minConsumption = document.getElementById("minConsumption").value;
+  let maxConsumption = document.getElementById("maxConsumption").value;
+
+  // Check if the year is a valid four-digit number within the specified range
+  if (year && (year < 1984 || year > 2025)) {
+    alert("Por favor ingrese un año válido entre 1984 y 2025.");
+    return;
+  }
+
+  // Fetch filtered data
+  filterData(
+    carType,
+    make,
+    model,
+    year,
+    transmission,
+    minConsumption,
+    maxConsumption
+  );
+
+  // Close the modal after applying filters
+  document.getElementById("filterModal").style.display = "none";
+};
+
+// Event listener to restrict input to 4 digits
+document.getElementById("year").addEventListener("input", function (event) {
+  // Ensure the value is numeric and has at most 4 characters
+  if (this.value.length > 4) {
+    this.value = this.value.slice(0, 4);
+  }
+  // Remove any non-numeric characters
+  this.value = this.value.replace(/\D/g, '');
+});

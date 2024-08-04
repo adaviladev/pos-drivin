@@ -61,7 +61,8 @@
         </div>
         <div class="form-group">
           <label for="year">Año:</label>
-          <input type="number" id="year" name="year" class="form-control" />
+          <input type="number" id="year" name="year" class="form-control" min="1984" max="2025"
+            placeholder="Ingrese un año entre 1984 y 2025" maxlength="4" />
         </div>
         <div class="form-group">
           <label for="transmission">Tipo de Transmisión:</label>
@@ -109,11 +110,11 @@
     <div id="map-container" class="modal-content">
       <span class="close-map-modal">&times;</span>
       <h2 class="map-title">Datos de ubicación</h2>
-  <div id="vehicle-info">
-    <p><strong>Marca:</strong> <span id="vehicle-make"></span></p>
-    <p><strong>Modelo:</strong> <span id="vehicle-model"></span></p>
-    <p><strong>Año:</strong> <span id="vehicle-year"></span></p>
-  </div>
+      <div id="vehicle-info">
+        <p><strong>Marca:</strong> <span id="vehicle-make"></span></p>
+        <p><strong>Modelo:</strong> <span id="vehicle-model"></span></p>
+        <p><strong>Año:</strong> <span id="vehicle-year"></span></p>
+      </div>
       <div id="map" style="height: 400px;"></div>
     </div>
   </div>
