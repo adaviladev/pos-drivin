@@ -67,10 +67,16 @@
           <label for="transmission">Tipo de Transmisión:</label>
           <input type="text" id="transmission" name="transmission" class="form-control" />
         </div>
-        <!-- <div class="form-group">
-            <label for="mpgRange">Consumo (mpg):</label>
-            <input type="text" id="mpgRange" name="mpgRange" class="form-control" />
-          </div> -->
+
+        <div class="form-group">
+          <label for="minConsumption">Rendimiento Mínimo (km/l):</label>
+          <input type="number" id="minConsumption" name="minConsumption" class="form-control" step="0.1" />
+        </div>
+        <div class="form-group">
+          <label for="maxConsumption">Rendimiento Máximo (km/l):</label>
+          <input type="number" id="maxConsumption" name="maxConsumption" class="form-control" step="0.1" />
+        </div>
+
         <div class="filter-btns">
           <button type="submit" class="btn btn-success filter-btn">Aplicar Filtros</button>
           <button type="button" class="btn btn-primary clear-filter-btn">Limpiar Filtros</button>
@@ -90,9 +96,9 @@
         <th>Modelo</th>
         <th>Año</th>
         <th>Tipo de Transmisión</th>
-        <th>Consumo en Ciudad</th>
-        <th>Consumo en Carretera</th>
-        <th>Consumo Mixto</th>
+        <th>Rendimiento en Ciudad</th>
+        <th>Rendimiento en Carretera</th>
+        <th>Rendimiento Mixto</th>
       </tr>
     </thead>
     <tbody></tbody>

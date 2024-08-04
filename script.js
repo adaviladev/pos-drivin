@@ -1,3 +1,11 @@
+// Function to parse km/l values and return them as floats for sorting
+const parseKml = (data, type, row) => {
+  if (type === "sort" || type === "type") {
+    return parseFloat(data.split(" ")[0]);
+  }
+  return data;
+};
+
 // Initialize the DataTable for the HTML element with the ID 'drivin' with config options
 let table = $("#drivin").DataTable({
   paging: true,
@@ -5,6 +13,13 @@ let table = $("#drivin").DataTable({
   lengthChange: false,
   ordering: true,
   searching: false,
+  columnDefs: [
+    {
+      targets: [6, 7, 8],
+      render: parseKml,
+      type: "num",
+    }, // Specify numeric type for consumption columns
+  ],
 });
 
 // Initialize a Leaflet map and set its initial view
@@ -37,12 +52,12 @@ const historicalLandmarks = [
 // Function to format transmission type
 const formatTransmission = (transmission) => {
   switch (transmission) {
-    case 'a':
-      return 'Automática';
-    case 'm':
-      return 'Manual';
+    case "a":
+      return "Automática";
+    case "m":
+      return "Manual";
     default:
-      return 'N/A';
+      return "N/A";
   }
 };
 
@@ -65,42 +80,36 @@ const formatFuelType = (fuelType) => {
 // Function to format class type
 const formatClass = (carClass) => {
   switch (carClass) {
-    case 'large car':
-      return 'Vehículo grande';
-    case 'midsize car':
-      return 'Vehículo mediano';
-    case 'midsize-large station wagon':
-      return 'Furgoneta mediana-grande';
-    case 'small pickup truck':
-      return 'Camioneta pequeña';
-    case 'small station wagon':
-      return 'Furgoneta pequeña';
-    case 'standard pickup truck':
-      return 'Camioneta estándar';
-    case 'compact car':
-      return 'Vehículo compacto';
-    case 'subcompact car':
-      return 'Vehículo subcompacto';
-    case 'special purpose vehicle':
-      return 'Vehículo de propósito especial';
-    case 'two seater':
-      return 'Biplaza';
-    case 'mini compact car':
-      return 'Vehículo mini compacto';
-    case 'sport utility vehicle':
-      return 'Vehículo utilitario deportivo (SUV)';
-    case 'van':
-      return 'Furgoneta';
+    case "large car":
+      return "Vehículo grande";
+    case "midsize car":
+      return "Vehículo mediano";
+    case "midsize-large station wagon":
+      return "Furgoneta mediana-grande";
+    case "small pickup truck":
+      return "Camioneta pequeña";
+    case "small station wagon":
+      return "Furgoneta pequeña";
+    case "standard pickup truck":
+      return "Camioneta estándar";
+    case "compact car":
+      return "Vehículo compacto";
+    case "subcompact car":
+      return "Vehículo subcompacto";
+    case "special purpose vehicle":
+      return "Vehículo de propósito especial";
+    case "two seater":
+      return "Biplaza";
+    case "mini compact car":
+      return "Vehículo mini compacto";
+    case "sport utility vehicle":
+      return "Vehículo utilitario deportivo (SUV)";
+    case "van":
+      return "Furgoneta";
     default:
-      return 'N/A';
+      return "N/A";
   }
 };
-
-// const formatMeasurement = (measure) => {
-//   switch (measure) {
-//     case `${convertMpgToKml}`:
-//   } return `${convertMpgToKml} + km/l`
-// }
 
 // Function to convert mpg to km/l
 const convertMpgToKml = (mpg) => {
@@ -169,7 +178,15 @@ const fetchData = (apiUrl) => {
 };
 
 // Function to fetch data with filters
-const filterData = (carType, make, model, year, transmission) => {
+const filterData = (
+  carType,
+  make,
+  model,
+  year,
+  transmission,
+  minConsumption,
+  maxConsumption
+) => {
   // Build the API URL with filters
   let apiUrl = `https://api.api-ninjas.com/v1/cars?limit=50`;
 
@@ -178,13 +195,10 @@ const filterData = (carType, make, model, year, transmission) => {
   if (model) apiUrl += `&model=${model}`;
   if (year) apiUrl += `&year=${year}`;
   if (transmission) apiUrl += `&transmission=${transmission}`;
-
-  // Uncomment this if you have mpgRange handling in the future
-  // Assume mpgRange is a string in the format 'min-max'
-  // if (mpgRange) {
-  //   const [minMpg, maxMpg] = mpgRange.split("-");
-  //   apiUrl += `&min_combined_mpg=${minMpg}&max_combined_mpg=${maxMpg}`;
-  // }
+  if (minConsumption && !isNaN(minConsumption))
+    apiUrl += `&min_comb_mpg=${(minConsumption / 0.425144).toFixed(2)}`; // Convert km/l to mpg
+  if (maxConsumption && !isNaN(maxConsumption))
+    apiUrl += `&max_comb_mpg=${(maxConsumption / 0.425144).toFixed(2)}`; // Convert km/l to mpg
 
   fetchData(apiUrl);
 };
@@ -192,16 +206,26 @@ const filterData = (carType, make, model, year, transmission) => {
 // Event listener for filter form submission
 document.getElementById("filterForm").onsubmit = function (event) {
   event.preventDefault();
+
   // Get filter values
   let carType = document.getElementById("carType").value;
   let make = document.getElementById("make").value;
   let model = document.getElementById("model").value;
   let year = document.getElementById("year").value;
   let transmission = document.getElementById("transmission").value;
-  // let mpgRange = document.getElementById("mpgRange").value;
+  let minConsumption = document.getElementById("minConsumption").value;
+  let maxConsumption = document.getElementById("maxConsumption").value;
 
   // Fetch filtered data
-  filterData(carType, make, model, year, transmission); //deleted mpgRange until fixed
+  filterData(
+    carType,
+    make,
+    model,
+    year,
+    transmission,
+    minConsumption,
+    maxConsumption
+  );
 
   // Close the modal after applying filters
   document.getElementById("filterModal").style.display = "none";
@@ -229,7 +253,6 @@ $("#drivin tbody").on("click", "tr", function () {
   }
 });
 
-
 // Modals
 // Open the Filter Modal
 document.getElementById("openModalBtn").onclick = function () {
@@ -254,7 +277,6 @@ window.onclick = function (event) {
     document.getElementById("mapModal").style.display = "none";
   }
 };
-
 
 // Add event listener for the clear filters button
 document
