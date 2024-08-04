@@ -100,7 +100,7 @@ const formatClass = (carClass) => {
       return "Vehículo de propósito especial";
     case "two seater":
       return "Biplaza";
-    case "mini compact car":
+    case "minicompact car":
       return "Vehículo mini compacto";
     case "sport utility vehicle":
       return "Vehículo utilitario deportivo (SUV)";
@@ -148,9 +148,9 @@ const processVehicleData = (data) => {
     car.model || "N/A",
     car.year || "N/A",
     car.transmission || "N/A",
-    car.city_kml || "N/A", // Usar los valores convertidos en km/l
-    car.highway_kml || "N/A", // Usar los valores convertidos en km/l
-    car.combination_kml || "N/A", // Usar los valores convertidos en km/l
+    car.city_kml || "N/A",
+    car.highway_kml || "N/A",
+    car.combination_kml || "N/A",
   ]);
 
   // Clear the existing data in the DataTable and add the new data
@@ -173,7 +173,10 @@ const fetchData = (apiUrl) => {
       }
       return response.json();
     })
-    .then(processVehicleData)
+    .then((data) => {
+      console.log(data); // Añade esta línea para ver los datos de la API en la consola
+      processVehicleData(data);
+    })
     .catch((error) => console.error("Error:", error));
 };
 
@@ -201,6 +204,7 @@ const filterData = (
     apiUrl += `&max_comb_mpg=${(maxConsumption / 0.425144).toFixed(2)}`; // Convert km/l to mpg
 
   fetchData(apiUrl);
+  console.log(apiUrl);
 };
 
 // Event listener for filter form submission
