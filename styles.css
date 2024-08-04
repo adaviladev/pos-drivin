@@ -1,7 +1,6 @@
 body {
   background-color: rgb(16, 24, 40);
   color: rgb(245, 245, 245);
-  font-family: po;
   font-family: "Poppins", sans-serif;
   max-width: 80vw;
   margin: auto;
@@ -50,7 +49,8 @@ table {
   color: black;
 }
 
-.close-filter-modal, .close-map-modal {
+.close-filter-modal,
+.close-map-modal {
   color: #747373;
   float: right;
   font-size: 28px;
