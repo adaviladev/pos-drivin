@@ -235,12 +235,23 @@ document.getElementById("filterForm").onsubmit = function (event) {
   document.getElementById("filterModal").style.display = "none";
 };
 
+// Function to update the content of the vehicle info div
+const updateVehicleInfo = (vehicle) => {
+  document.getElementById("vehicle-make").textContent = vehicle.make.toUpperCase() || "N/A";
+  document.getElementById("vehicle-model").textContent =
+    vehicle.model.toUpperCase() || "N/A";
+  document.getElementById("vehicle-year").textContent = vehicle.year || "N/A";
+};
+
 // Add event listener to table rows for map updates
 $("#drivin tbody").on("click", "tr", function () {
   const dataIndex = table.row(this).index();
   const selectedVehicle = window.vehicleData[dataIndex];
 
   if (selectedVehicle && selectedVehicle.lat && selectedVehicle.lng) {
+    // Update the vehicle info in the div
+    updateVehicleInfo(selectedVehicle);
+
     document.getElementById("mapModal").style.display = "block"; // Muestra el modal primero
     setTimeout(() => {
       map.invalidateSize(); // Asegúrate de que Leaflet recalcula el tamaño del mapa

@@ -89,3 +89,22 @@ form {
 .filter-btns {
   margin-top: 18px;
 }
+
+.map-title {
+  font-size: 24px;
+  text-align: center;
+  margin-top: 5px;
+  margin-bottom: 20px;
+
+}
+ 
+#map {
+  margin-top: 20px;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+#vehicle-info>p {
+  margin: 0;
+  padding: 0;
+}
