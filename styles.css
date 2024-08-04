@@ -41,9 +41,9 @@ table {
 }
 
 .modal-content {
-  background-color: white;
+  background-color: rgb(237, 237, 237);
   margin: 10% auto;
-  padding: 20px;
+  padding: 25px;
   border: 1px solid #888;
   width: 80%;
   max-width: 600px;
