@@ -144,8 +144,8 @@ const processVehicleData = (data) => {
   const tableData = window.vehicleData.map((car) => [
     car.class || "N/A",
     car.fuel_type || "N/A",
-    car.make || "N/A",
-    car.model || "N/A",
+    car.make.toUpperCase() || "N/A",
+    car.model.toUpperCase() || "N/A",
     car.year || "N/A",
     car.transmission || "N/A",
     car.city_kml || "N/A",
