@@ -53,11 +53,11 @@
         </div>
         <div class="form-group">
           <label for="make">Marca:</label>
-          <input type="text" id="make" name="make" class="form-control" />
+          <input type="text" id="make" name="make" class="form-control" minlength="2" maxlength="50" />
         </div>
         <div class="form-group">
           <label for="model">Modelo:</label>
-          <input type="text" id="model" name="model" class="form-control" />
+          <input type="text" id="model" name="model" class="form-control" minlength="2" maxlength="50" />
         </div>
         <div class="form-group">
           <label for="year">Año:</label>
@@ -66,18 +66,25 @@
         </div>
         <div class="form-group">
           <label for="transmission">Tipo de Transmisión:</label>
-          <input type="text" id="transmission" name="transmission" class="form-control" />
+          <select id="transmission" name="transmission" class="form-control">
+            <option value="">Seleccionar</option>
+            <option value="a">Automática</option>
+            <option value="m">Manual</option>
+          </select>
         </div>
 
         <div class="form-group">
-          <label for="minConsumption">Rendimiento Mínimo (km/l):</label>
-          <input type="number" id="minConsumption" name="minConsumption" class="form-control" step="0.1" />
+          <label for="minConsumption">Rendimiento Mínimo Mixto (km/l):</label>
+          <input type="range" id="minConsumption" name="minConsumption" class="form-control" step="0.1" min="0" max="30"
+            value="0" />
+          <output class="minConsumptionOutput" for="minConsumption"></output>
         </div>
         <div class="form-group">
-          <label for="maxConsumption">Rendimiento Máximo (km/l):</label>
-          <input type="number" id="maxConsumption" name="maxConsumption" class="form-control" step="0.1" />
+          <label for="maxConsumption">Rendimiento Máximo Mixto (km/l):</label>
+          <input type="range" id="maxConsumption" name="maxConsumption" class="form-control" step="0.1" min="0" max="30"
+            value="0" />
+          <output class="maxConsumptionOutput" for="maxConsumption"></output>
         </div>
-
         <div class="filter-btns">
           <button type="submit" class="btn btn-success filter-btn">Aplicar Filtros</button>
           <button type="button" class="btn btn-dark clear-filter-btn">Limpiar Filtros</button>

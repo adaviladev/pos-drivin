@@ -136,6 +136,7 @@ const processVehicleData = (data) => {
     transmission: formatTransmission(car.transmission),
     fuel_type: formatFuelType(car.fuel_type),
     class: formatClass(car.class),
+    
     city_kml: convertMpgToKml(car.city_mpg),
     highway_kml: convertMpgToKml(car.highway_mpg),
     combination_kml: convertMpgToKml(car.combination_mpg),
@@ -238,7 +239,8 @@ document.getElementById("filterForm").onsubmit = function (event) {
 
 // Function to update the content of the vehicle info div
 const updateVehicleInfo = (vehicle) => {
-  document.getElementById("vehicle-make").textContent = vehicle.make.toUpperCase() || "N/A";
+  document.getElementById("vehicle-make").textContent =
+    vehicle.make.toUpperCase() || "N/A";
   document.getElementById("vehicle-model").textContent =
     vehicle.model.toUpperCase() || "N/A";
   document.getElementById("vehicle-year").textContent = vehicle.year || "N/A";
@@ -305,7 +307,7 @@ document
     inputs.forEach((input) => (input.value = ""));
   });
 
-  // Event listener for filter form submission
+// Event listener for filter form submission
 document.getElementById("filterForm").onsubmit = function (event) {
   event.preventDefault();
 
@@ -346,5 +348,27 @@ document.getElementById("year").addEventListener("input", function (event) {
     this.value = this.value.slice(0, 4);
   }
   // Remove any non-numeric characters
-  this.value = this.value.replace(/\D/g, '');
+  this.value = this.value.replace(/\D/g, "");
+});
+
+const maxConsumptionSlider = document.querySelector("#maxConsumption");
+const maxConsumptionSliderOutput = document.querySelector(
+  ".maxConsumptionOutput"
+);
+
+maxConsumptionSliderOutput.textContent = maxConsumptionSlider.value;
+
+maxConsumptionSlider.addEventListener("input", function () {
+  maxConsumptionSliderOutput.textContent = maxConsumptionSlider.value;
+});
+
+const minConsumptionSlider = document.querySelector("#minConsumption");
+const minConsumptionSliderOutput = document.querySelector(
+  ".minConsumptionOutput"
+);
+
+minConsumptionSliderOutput.textContent = minConsumptionSlider.value;
+
+minConsumptionSlider.addEventListener("input", function () {
+  minConsumptionSliderOutput.textContent = minConsumptionSlider.value;
 });
