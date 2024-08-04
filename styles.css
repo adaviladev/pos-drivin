@@ -17,6 +17,63 @@ h1 {
   margin-bottom: 10px;
 }
 
+.intro-text {
+  margin-top: 80px;
+  display: flex;
+}
+
+.subtitle-container {
+  max-width: 40%;
+  margin-right: 120px;
+}
+
+.intro-subtitle {
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.intro-subtitle2 {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 30px;
+}
+
+.second-subtitle {
+  margin-bottom: 40px;
+}
+
+.hero-text {
+  font-weight: 200;
+  display: flex;
+  flex-direction: column;
+  line-height: 25px;
+}
+
+.hero-text {
+  line-height: 1.6;
+}
+.hero-text i {
+  display: inline;
+  vertical-align: middle;
+  margin-right: 8px;
+}
+.hero-text strong {
+  margin-right: 4px;
+}
+
+strong {
+  font-weight: 500;
+  display: inline;
+}
+
+i {
+  margin-right: 10px;
+}
+
+.icon-spacing {
+  margin-bottom: 5px;
+}
+
 th,
 td,
 tbody {
@@ -54,7 +111,7 @@ table {
   color: black;
 }
 
-.modal-content>p {
+.modal-content > p {
   padding-left: 25px;
 }
 
@@ -103,16 +160,15 @@ form {
   text-align: center;
   margin-top: 5px;
   margin-bottom: 20px;
-
 }
- 
+
 #map {
   margin-top: 20px;
   border: 1px solid black;
   border-radius: 5px;
 }
 
-#vehicle-info>p {
+#vehicle-info > p {
   margin: 0;
   padding: 0;
 }
