@@ -26,7 +26,7 @@ body {
   .first-container > .first-container-subtitle {
     font-size: 24px;
     width: 90vw;
-    margin-bottom: 24px;
+    margin-bottom: 18px;
   }
   .first-container {
     max-width: 80% !important;
@@ -37,6 +37,16 @@ body {
     display: inline-block;
     width: 85vw;
     align-items: center;
+  }
+
+  .filter-btns {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .modal > .modal-content > * {
+    padding: 10px 12px 10px 12px;
+    margin: 0;
   }
 }
 
@@ -120,22 +130,28 @@ table {
 .modal-content {
   background-color: rgb(237, 237, 237);
   margin: 10% auto;
-  padding: 25px;
   border: 1px solid #888;
   width: 80%;
   max-width: 600px;
   color: black;
 }
 
-.modal-content > p {
-  padding-left: 25px;
+.modal > .modal-content > * {
+  padding-left: 15px;
+  padding-right: 15px;
+  margin: 0;
+}
+
+.modal > .modal-content > span {
+  padding: 5px 15px 5px 15px;
+  margin: 0;
 }
 
 .close-filter-modal,
 .close-map-modal {
   color: #747373;
   float: right;
-  font-size: 28px;
+  font-size: 25px;
   font-weight: bold;
 }
 
@@ -143,24 +159,14 @@ table {
 .close-filter-modal:focus,
 .close-map-modal:hover,
 .close-map-modal:focus {
-  color: black;
+  color: red;
   text-decoration: none;
   cursor: pointer;
 }
 
-form {
-  padding: 5%;
-}
-
-#filterForm {
-  padding-top: 0;
-  padding-bottom: 0;
-}
-
 .filter-title {
-  padding-left: 5%;
   font-size: 24px;
-  margin-bottom: 12px;
+  margin-bottom: 12px !important;
 }
 
 .filter-btns {
