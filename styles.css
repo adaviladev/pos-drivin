@@ -40,7 +40,7 @@ body {
   }
 
   #openModalBtn {
-    margin-bottom: 80px!important;
+    margin-bottom: 80px !important;
     display: inline-block;
     width: 85vw;
     align-items: center;
@@ -157,9 +157,10 @@ table {
 .close-filter-modal,
 .close-map-modal {
   color: #747373;
-  float: right;
   font-size: 25px;
   font-weight: bold;
+  padding: 5px 15px 5px 15px;
+  margin: 0;
 }
 
 .close-filter-modal:hover,
@@ -172,7 +173,7 @@ table {
 }
 
 .filter-title {
-  font-size: 24px;
+  font-size: 20px;
   margin-bottom: 12px !important;
 }
 
@@ -181,10 +182,8 @@ table {
 }
 
 .map-title {
-  font-size: 24px;
-  text-align: center;
-  margin-top: 5px;
-  margin-bottom: 20px;
+  font-size: 20px;
+  margin-bottom: 12px;
 }
 
 #map {
