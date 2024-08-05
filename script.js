@@ -13,7 +13,7 @@ let table = $("#drivin").DataTable({
   lengthChange: false,
   ordering: true,
   searching: false,
-  // responsive: true,
+  responsive: true,
   columnDefs: [
     {
       targets: [6, 7, 8],

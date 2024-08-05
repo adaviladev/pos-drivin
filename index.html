@@ -39,19 +39,19 @@
 </head>
 
 <body>
-  <h1>Gestor de Vehículos Driv.in</h1>
+  <h1 class="app-title">Gestor de Vehículos Driv.in</h1>
 
-  <div class="intro-text">
-    <div class="subtitle-container">
-      <h2 class="intro-subtitle">
+  <div class="welcome-container">
+    <div class="first-container">
+      <h2 class="first-container-subtitle">
         ¡Bienvenido a la herramienta definitiva para gestionar y rastrear tus vehículos!
       </h2>
       <p>Simplifica la administración de tu flota con nuestra App <br> Driv.in.</p>
       <button id="openModalBtn" class="btn btn-outline-info">Buscar Vehículos</button>
     </div>
-    <div class="second-subtitle">
-      <h3 class="intro-subtitle2">Con el gestor de vehículos Driv.in, puedes:</h3>
-      <p class="hero-text">
+    <div class="second-container">
+      <h3 class="second-container-subtitle">Con el gestor de vehículos Driv.in, puedes:</h3>
+      <p>
       <div class="icon-spacing"><i class="fa-brands fa-searchengin fa-lg"></i><strong>Explorar:</strong></div>
       <p>Navega a través de una lista completa de vehículos, filtrando por tipo, marca, modelo y más.</p>
       <div class="icon-spacing"><i class="fa-solid fa-map fa-lg"></i><strong>Visualizar:</strong></div>
@@ -124,22 +124,24 @@
 
   <!-- Table -->
 
-  <table id="drivin" class="display table table-striped table-bordered">
-    <thead>
-      <tr>
-        <th>Tipo de Auto</th>
-        <th>Tipo de Combustible</th>
-        <th>Marca</th>
-        <th>Modelo</th>
-        <th>Año</th>
-        <th>Tipo de Transmisión</th>
-        <th>Rendimiento en Ciudad</th>
-        <th>Rendimiento en Carretera</th>
-        <th>Rendimiento Mixto</th>
-      </tr>
-    </thead>
-    <tbody></tbody>
-  </table>
+  <div style="overflow-x:auto;">
+    <table id="drivin" class="display table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>Tipo de Auto</th>
+          <th>Tipo de Combustible</th>
+          <th>Marca</th>
+          <th>Modelo</th>
+          <th>Año</th>
+          <th>Tipo de Transmisión</th>
+          <th>Rendimiento en Ciudad</th>
+          <th>Rendimiento en Carretera</th>
+          <th>Rendimiento Mixto</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
 
   <!-- Map Modal -->
   <div id="mapModal" class="modal">

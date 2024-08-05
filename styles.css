@@ -8,57 +8,70 @@ body {
   min-height: 100vh;
 }
 
-h1 {
+.app-title {
   text-align: center;
   margin-top: 5vh;
 }
-.map-instruction {
-  margin-top: 20px;
-  margin-bottom: 10px;
-}
 
-.intro-text {
+.welcome-container {
   margin-top: 80px;
   display: flex;
 }
 
-.subtitle-container {
+@media only screen and (max-width: 600px) {
+  .welcome-container {
+    display: flex;
+    flex-direction: column;
+  }
+  .first-container > .first-container-subtitle {
+    font-size: 24px;
+    width: 90vw;
+    margin-bottom: 24px;
+  }
+  .first-container {
+    max-width: 80% !important;
+    margin-right: 20px;
+  }
+  #openModalBtn {
+    margin-bottom: 20px;
+    display: inline-block;
+    width: 85vw;
+    align-items: center;
+  }
+}
+
+.first-container {
   max-width: 40%;
   margin-right: 120px;
 }
 
-.intro-subtitle {
+.first-container-subtitle {
   font-size: 32px;
   font-weight: 700;
 }
 
-.intro-subtitle2 {
+.second-container-subtitle {
   font-size: 18px;
   font-weight: 500;
   margin-bottom: 30px;
 }
 
-.second-subtitle {
+.second-container {
   margin-bottom: 40px;
 }
 
-.hero-text {
+.second-container > p {
   font-weight: 200;
   display: flex;
   flex-direction: column;
   line-height: 25px;
-}
-
-.hero-text {
   line-height: 1.6;
 }
-.hero-text i {
+
+i {
   display: inline;
   vertical-align: middle;
-  margin-right: 8px;
-}
-.hero-text strong {
-  margin-right: 4px;
+  margin-right: 10px;
 }
 
 strong {
@@ -66,12 +79,17 @@ strong {
   display: inline;
 }
 
-i {
-  margin-right: 10px;
-}
-
 .icon-spacing {
   margin-bottom: 5px;
+}
+
+#openModalBtn {
+  margin-bottom: 20px;
+}
+
+.map-instruction {
+  margin-top: 20px;
+  margin-bottom: 10px;
 }
 
 th,
@@ -85,8 +103,6 @@ tbody {
 table {
   font-size: smaller;
 }
-
-/* Estilos para modal */
 
 /* Estilos para el modal */
 .modal {
@@ -130,10 +146,6 @@ table {
   color: black;
   text-decoration: none;
   cursor: pointer;
-}
-
-#openModalBtn {
-  margin-top: 60px;
 }
 
 form {
