@@ -40,7 +40,7 @@ body {
   }
 
   #openModalBtn {
-    margin-bottom: 20px;
+    margin-bottom: 80px!important;
     display: inline-block;
     width: 85vw;
     align-items: center;
