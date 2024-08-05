@@ -193,8 +193,9 @@ table {
 
 #map {
   margin-top: 20px;
-  border: 1px solid black;
+  border: 2px solid black;
   border-radius: 5px;
+  padding: 5px!important;
 }
 
 #vehicle-info > p {

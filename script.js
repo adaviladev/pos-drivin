@@ -24,7 +24,7 @@ let table = $("#drivin").DataTable({
 });
 
 // Initialize a Leaflet map and set its initial view
-var map = L.map("map").setView([51.505, -0.09], 13);
+var map = L.map("map").setView([51.505, -0.09], 16);
 
 // Add a tile layer to the map using OpenStreetMap tiles
 L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
